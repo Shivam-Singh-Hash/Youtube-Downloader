@@ -38,7 +38,7 @@ Built with vanilla HTML, CSS, and JavaScript on the frontend and powered by `yt-
 
 <div align="center">
 
-<img src="https://placehold.co/800x450/04040a/ff2d55?text=🎬+Demo+GIF+Coming+Soon&font=montserrat" width="80%" alt="Demo GIF"/>
+<video src="assets/demo.mp4" controls width="80%"></video>
 
 <br/><br/>
 
@@ -132,11 +132,18 @@ Built with vanilla HTML, CSS, and JavaScript on the frontend and powered by `yt-
 ```
 📦 youtube-downloader/
 │
-├── 🐍 app.py           ← Python backend — server, API endpoints, subprocess
-├── 🌐 index.html       ← Main UI structure of the web application
-├── 🎨 style.css        ← Premium styling, glassmorphism & animations
-├── ⚡ script.js        ← Interactive frontend logic & API communication
-└── 📄 README.md        ← Project documentation
+├── 🐍 app.py              ← Python backend — server, API endpoints, subprocess
+├── 🌐 index.html          ← Main UI structure of the web application
+├── 🎨 style.css           ← Premium styling, glassmorphism & animations
+├── ⚡ script.js           ← Interactive frontend logic & API communication
+├── 📄 README.md           ← Project documentation
+│
+└── 📁 assets/
+    ├── 🎬 demo.mp4        ← Demo video
+    ├── 🖼️  home.png        ← Homepage screenshot
+    ├── 🖼️  downloading.png ← Download progress screenshot
+    ├── 🖼️  success.png     ← Success screen screenshot
+    └── 🖼️  mobile.png      ← Mobile view screenshot
 ```
 
 ---
@@ -225,27 +232,25 @@ Step 6 →  File is saved automatically ✅
 <table>
   <tr>
     <td align="center">
-      <img src="https://placehold.co/380x220/04040a/ff2d55?text=🏠+Homepage+UI&font=montserrat" width="380" alt="Homepage UI"/>
+      <img src="assets/home.png" width="380" alt="Homepage UI"/>
       <br/><sub><b>Homepage — Glassmorphism UI</b></sub>
     </td>
     <td align="center">
-      <img src="https://placehold.co/380x220/04040a/00d4ff?text=📊+Download+Progress&font=montserrat" width="380" alt="Downloading"/>
+      <img src="assets/downloading.png" width="380" alt="Download Progress"/>
       <br/><sub><b>Live Download Progress</b></sub>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="https://placehold.co/380x220/04040a/00ffb3?text=✅+Download+Complete&font=montserrat" width="380" alt="Success"/>
+      <img src="assets/success.png" width="380" alt="Successful Download"/>
       <br/><sub><b>Successful Download 🎉</b></sub>
     </td>
     <td align="center">
-      <img src="https://placehold.co/380x220/04040a/ffd60a?text=📱+Mobile+View&font=montserrat" width="380" alt="Mobile"/>
+      <img src="assets/mobile.png" width="380" alt="Mobile View"/>
       <br/><sub><b>Responsive Mobile Design</b></sub>
     </td>
   </tr>
 </table>
-
-> 💡 Replace placeholders above with real screenshots from your app!
 
 </div>
 
@@ -319,7 +324,7 @@ This tool is intended for **personal, educational use only**. Please respect You
 
 <div align="center">
 
-<img src="https://github.com/Shivam-Singh-Hash.png" width="110" style="border-radius:50%" alt="Shivam Singh" onerror="this.src='https://placehold.co/110x110/04040a/ff2d55?text=SS'"/>
+<img src="https://github.com/Shivam-Singh-Hash.png" width="110" style="border-radius:50%" alt="Shivam Singh"/>
 
 ### **Shivam Singh**
 *Building cool things, one commit at a time.*
