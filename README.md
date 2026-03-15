@@ -38,7 +38,17 @@ Built with vanilla HTML, CSS, and JavaScript on the frontend and powered by `yt-
 
 <div align="center">
 
-<video src="assets/demo.mp4" controls width="80%"></video>
+## 🎬 Demo
+
+<div align="center">
+
+[![Watch Demo](assets/home.png)](assets/demo.mp4)
+
+<br/><br/>
+
+> 🎯 **Paste a URL → Analyze → Choose Format → Download.**
+
+</div>
 
 <br/><br/>
 
