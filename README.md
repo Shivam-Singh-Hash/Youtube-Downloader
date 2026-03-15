@@ -38,15 +38,8 @@ Built with vanilla HTML, CSS, and JavaScript on the frontend and powered by `yt-
 
 <div align="center">
 
-## 🎬 Demo
-
-<div align="center">
-
 [![Watch Demo](assets/home.png)](assets/demo.mp4)
 
-<br/><br/>
-
-> 🎯 **Paste a URL → Analyze → Choose Format → Download.**
 
 </div>
 
