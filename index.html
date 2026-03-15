@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YTDL — YouTube Downloader</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<div class="page">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge"><div class="badge-dot"></div>Free &nbsp;·&nbsp; Fast &nbsp;·&nbsp; No limits</div>
+    <h1 class="hero-title">
+      <span class="title-line1">YOUTUBE</span>
+      <span class="title-line2">DOWNLOADER</span>
+    </h1>
+    <p class="hero-sub">Download any video or audio in seconds.<br>No watermarks, no signup, no nonsense.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Formats</div></div>
+    <div class="stat"><div class="stat-num">4K</div><div class="stat-label">Max Quality</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Downloads</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">Watermarks</div></div>
+  </div>
+
+  <!-- Main Card -->
+  <div class="main-card">
+    <div class="section-label">01 &nbsp; Paste your link</div>
+    <div class="url-field">
+      <div class="url-input-wrap">
+        <div class="yt-icon">▶</div>
+        <input type="text" class="url-input" id="urlInput" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off" spellcheck="false">
+      </div>
+      <button class="btn-analyze" id="analyzeBtn" onclick="analyzeUrl()">Analyze</button>
+    </div>
+    <div class="error-box" id="errorBox"></div>
+
+    <!-- Video Info -->
+    <div class="video-panel" id="videoPanel">
+      <div class="video-header">
+        <div class="video-thumb" id="videoThumb">🎬</div>
+        <div class="video-details">
+          <div class="video-title" id="vTitle">Loading…</div>
+          <div class="video-channel"><span>📺</span><span id="vChannel">Channel</span></div>
+          <div class="chips">
+            <div class="chip">⏱ <span id="vDuration">—</span></div>
+            <div class="chip">👁 <span id="vViews">—</span></div>
+            <div class="chip">👍 <span id="vLikes">—</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Format Section -->
+    <div class="format-section" id="formatSection">
+      <div class="section-label" style="margin-top:8px">02 &nbsp; Choose format</div>
+      <div class="format-tabs">
+        <div class="format-tab active" id="tabVideo" onclick="switchTab('video')">🎬 &nbsp;Video</div>
+        <div class="format-tab" id="tabAudio" onclick="switchTab('audio')">🎵 &nbsp;Audio</div>
+      </div>
+      <div class="format-grid" id="videoFormats">
+        <div class="fmt-card selected" onclick="pickFmt(this, 'mp4', 'best')"><div class="fmt-res">BEST</div><div class="fmt-type">AUTO · MP4</div></div>
+        <div class="fmt-card" onclick="pickFmt(this, 'mp4', '1080')"><div class="fmt-res">1080p</div><div class="fmt-type">FHD · MP4</div></div>
+        <div class="fmt-card" onclick="pickFmt(this, 'mp4', '720')"><div class="fmt-res">720p</div><div class="fmt-type">HD · MP4</div></div>
+        <div class="fmt-card" onclick="pickFmt(this, 'mp4', '480')"><div class="fmt-res">480p</div><div class="fmt-type">SD · MP4</div></div>
+      </div>
+      <div class="format-grid" id="audioFormats" style="display:none">
+        <!-- We only support MP3 extraction in backend right now -->
+        <div class="fmt-card audio" onclick="pickFmt(this, 'mp3', 'best')"><div class="fmt-res">MP3</div><div class="fmt-type">192K · BEST</div></div>
+      </div>
+      <div class="section-label">03 &nbsp; Start download</div>
+      <button class="btn-download" id="downloadBtn" onclick="startDownload()">
+        <div class="dl-bg"></div>
+        <div class="dl-icon">⬇</div>
+        <div class="btn-download-text">DOWNLOAD NOW</div>
+      </button>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-section" id="progressSection">
+      <div class="progress-header">
+        <div class="progress-status"><div class="pulse-dot"></div>Downloading</div>
+        <div class="progress-pct" id="pctDisplay">0%</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="meta-row">
+        <div class="p-meta"><div class="p-meta-label">Status</div><div class="p-meta-val" id="dlSpeed">—</div></div>
+        <div class="p-meta"><div class="p-meta-label">Time</div><div class="p-meta-val" id="dlEta">—</div></div>
+        <div class="p-meta"><div class="p-meta-label">Size</div><div class="p-meta-val" id="dlSize">—</div></div>
+        <div class="p-meta"><div class="p-meta-label">Format</div><div class="p-meta-val" id="dlFmt">—</div></div>
+      </div>
+      <div class="terminal" id="terminal"></div>
+    </div>
+
+    <!-- Success -->
+    <div class="success-section" id="successSection">
+      <span class="success-burst">🎉</span>
+      <div class="success-title">Downloaded!</div>
+      <div class="success-sub">File saved to:</div>
+      <div class="success-path" id="successPath">~/Downloads/YT-Downloads/video.mp4</div>
+      <button class="btn-again" onclick="resetAll()">↩ &nbsp; Download Another</button>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feat">⚡ Lightning fast</div>
+    <div class="feat">🔒 No tracking</div>
+    <div class="feat">🎵 Extract audio</div>
+    <div class="feat">📱 Shorts support</div>
+    <div class="feat">🎬 Up to 4K</div>
+    <div class="feat">🆓 Completely free</div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="glass-footer">
+    <div class="footer-content">
+      <div class="footer-text">
+        &copy; 2026 Shivam Singh. All Rights Reserved.
+      </div>
+      <div class="footer-socials">
+        <a href="https://github.com/Shivam-Singh-Hash" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/contactshivamsingh/" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.instagram.com/theshivamsinghrathore/" class="social-icon" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
